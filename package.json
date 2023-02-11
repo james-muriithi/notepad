@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "lint": "eslint . --fix --ignore-path .gitignore"
+    "lint": "eslint src --ext .vue,.ts --max-warnings 0 --no-fix",
+    "lint:fix": "eslint src --ext .vue --fix"
   },
   "dependencies": {
     "@mdi/font": "7.0.96",
@@ -20,12 +21,15 @@
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.19.1",
     "@babel/types": "^7.20.7",
     "@types/node": "^18.11.9",
     "@types/uuid4": "^2.0.0",
     "@types/webfontloader": "^1.6.35",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "@typescript-eslint/parser": "^5.51.0",
     "@vitejs/plugin-vue": "^3.0.3",
-    "@vue/eslint-config-typescript": "^11.0.0",
+    "@vue/eslint-config-typescript": "^11.0.2",
     "eslint": "^8.22.0",
     "eslint-plugin-vue": "^9.3.0",
     "sass": "^1.55.0",
