@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar flat>
+  <v-app-bar flat :border="preferredTheme === 'light'">
     <v-btn icon flat :size="40">
       <v-icon icon="mdi-square-edit-outline" />
     </v-btn>

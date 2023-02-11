@@ -2,6 +2,7 @@
   <v-navigation-drawer
     :width="mdAndUp ? 230 : 200"
     :permanent="isNavigationDrawerPermanent"
+    style="position: fixed; bottom: 0;top: 0;"
   >
     <template v-slot:prepend>
       <v-list-item lines="two" class="text-right">
