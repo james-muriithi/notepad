@@ -40,9 +40,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from "vue";
-import DefaultBar from "./AppBar.vue";
-import DefaultView from "./View.vue";
+import { watch } from "vue";
 import { useNotesStore } from "@/store/notes";
 import { storeToRefs } from "pinia";
 import { useDisplay } from "vuetify";
@@ -65,5 +63,5 @@ isNavigationDrawerPermanent.value = smAndUp.value;
 
 watch(smAndUp, (smAndUp) => {
   isNavigationDrawerPermanent.value = smAndUp;
-})
+});
 </script>
