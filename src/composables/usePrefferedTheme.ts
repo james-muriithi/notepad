@@ -1,15 +1,11 @@
-import { Themes } from "@/types/Theme";
-import { useTheme } from "vuetify";
+import { Theme } from "@/types/Theme";
 
-export const preferredTheme = (): string => {
-  const storedTheme = localStorage.getItem('theme');
+export const usePrefferedTheme = (): Theme => {
+  const storedTheme = localStorage.getItem('theme') as Theme;
   const hasDarkPreference = window.matchMedia(
     "(prefers-color-scheme: dark)"
   ).matches;
-  if (storedTheme && storedTheme in Themes) return storedTheme;
+  if (storedTheme) return storedTheme;
+
   return hasDarkPreference ? 'dark' : 'light'
 }
-
-export const usePrefferedTheme = (): void => {
-  useTheme().global.name.value = preferredTheme()
-};
