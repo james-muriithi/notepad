@@ -5,7 +5,7 @@ import uuid4 from "uuid4";
 
 interface State{
     notes: Note[],
-    currentNote: string,
+    currentNote: string|null,
 }
 
 export const useNotesStore = defineStore('notes', {
@@ -22,6 +22,6 @@ export const useNotesStore = defineStore('notes', {
                 content: 'lorem ipsum'
             }
         ] as Note[],
-        currentNote: ''
+        currentNote: null
     }),
 })
