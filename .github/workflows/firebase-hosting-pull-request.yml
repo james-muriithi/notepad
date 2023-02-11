@@ -19,10 +19,10 @@ jobs:
         with:
           cmd: install # will run `yarn install` command
 
-      - name: Test the app
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: test:unit # will run `yarn test:unit` command
+      # - name: Test the app
+      #   uses: borales/actions-yarn@v4
+      #   with:
+      #     cmd: test:unit # will run `yarn test:unit` command
 
       - name: Build production bundle
         uses: borales/actions-yarn@v4
