@@ -24,12 +24,12 @@
             @click="currentNote = id"
           >
             <template #title>
-              <h3 class="font-weight-bold text-capitalize">{{ title }}</h3>
+              <h3 class="font-weight-bold text-capitalize">{{ title||'New note' }}</h3>
             </template>
             <template #subtitle>
               <p class="mt-1">
-                <template v-if="content.length">
-                  {{ content.slice(0, 10) }}
+                <template v-if="getNoteContent(content).length">
+                  {{ getNoteContent(content).slice(0, 30) }}
                 </template>
                 <template v-else>
                   No content
@@ -70,4 +70,9 @@ isNavigationDrawerPermanent.value = smAndUp.value;
 watch(smAndUp, (smAndUp) => {
   isNavigationDrawerPermanent.value = smAndUp;
 });
+
+const getNoteContent = (content:string):string => {
+  const c = content.split('\n').slice(1);
+  return c.join('\n')
+}
 </script>

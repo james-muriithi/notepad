@@ -12,18 +12,22 @@ export const useNotesStore = defineStore('notes', () => {
 
 
     // getters
+    const currentNoteObject = computed((): Note | undefined => {
+        return notes.value.find(({ id }) => currentNote.value === id)
+    })
+
     const canCreateANewNote: ComputedRef<boolean> = computed(() => {
         if (!notes.value.length) return true;
         const currentNoteObject = notes.value.find(({ id }) => currentNote.value === id)
         return !!currentNoteObject?.content
-    })
+    });
 
     // actions
     const addNewNote = () => {
         if (!canCreateANewNote.value) return;
         const defaultNote: Note = {
             id: uuid4(),
-            title: "New note",
+            title: "",
             content: "",
             createdAt: new Date().toISOString(),
         };
@@ -39,10 +43,26 @@ export const useNotesStore = defineStore('notes', () => {
         currentNote.value = null;
     }
 
-    const deleteNote = (noteId: string|null): void => {
+    const deleteNote = (noteId: string | null): void => {
         notes.value = notes.value.filter(({ id }) => id !== noteId);
         setDefaultCurrentNote()
     }
 
-    return { notes, currentNote, canCreateANewNote, addNewNote, deleteNote, setDefaultCurrentNote }
+    const editNote = (title: string, content: string): void => {
+        notes.value = notes.value.map((note) => {
+            if (currentNote.value === note.id) {
+                return {
+                    ...note,
+                    title,
+                    content
+                }
+            }
+            return note
+        })
+    }
+
+    return {
+        notes, currentNote, canCreateANewNote, currentNoteObject,
+        addNewNote, deleteNote, setDefaultCurrentNote, editNote
+    }
 })

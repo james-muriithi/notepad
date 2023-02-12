@@ -3,8 +3,10 @@
     <v-textarea
       auto-grow
       variant="plain"
-      @focus="addNewNote"
+      @focus="createNewNoteOnFocus"
       ref="textArea"
+      :model-value="currentNoteObject?.content"
+      @update:model-value="updateNoteContent"
     />
   </v-container>
 </template>
@@ -17,18 +19,27 @@ import { useNotesStore } from "@/store/notes";
 // store
 const store = useNotesStore();
 
-const { addNewNote } = store;
-const { canCreateANewNote } = storeToRefs(store);
+const { addNewNote, editNote } = store;
+const { canCreateANewNote, currentNoteObject, currentNote } = storeToRefs(store);
 
 // refs
-const textArea:Ref<HTMLElement|null> = ref(null)
+const textArea: Ref<HTMLElement | null> = ref(null);
 
 watch(canCreateANewNote, (newValue) => {
-  if(!newValue) {
-    textArea.value?.focus()
+  if (!newValue) {
+    textArea.value?.focus();
   }
-})
+});
 
+const createNewNoteOnFocus = () => {
+  if(currentNote.value) return
+  addNewNote()
+}
+
+const updateNoteContent = (newContent: string): void => {
+  const [title] = newContent.split("\n");
+  editNote(title, newContent);  
+};
 </script>
 
 <style lang="scss" scoped>
