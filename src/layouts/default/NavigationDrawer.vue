@@ -28,7 +28,12 @@
             </template>
             <template #subtitle>
               <p class="mt-1">
-                {{ content.slice(0, 10) }}
+                <template v-if="content.length">
+                  {{ content.slice(0, 10) }}
+                </template>
+                <template v-else>
+                  No content
+                </template>
               </p>
             </template>
           </v-list-item>

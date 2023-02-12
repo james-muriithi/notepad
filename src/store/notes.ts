@@ -3,13 +3,13 @@ import Note from '@/types/Note'
 import { defineStore } from 'pinia';
 import uuid4 from "uuid4";
 
-interface State{
+interface State {
     notes: Note[],
-    currentNote: string|null,
+    currentNote: string | null,
 }
 
 export const useNotesStore = defineStore('notes', {
-    state: () : State => ({
+    state: (): State => ({
         notes: [
             {
                 id: uuid4(),
@@ -24,4 +24,13 @@ export const useNotesStore = defineStore('notes', {
         ] as Note[],
         currentNote: null
     }),
+    getters: {
+        canCreateANewNote(state: State): boolean {
+            const currentNote = state.notes.find(({ id }) => state.currentNote === id)
+            return !!currentNote?.content
+        }
+    },
+    actions: {
+        
+    }
 })
