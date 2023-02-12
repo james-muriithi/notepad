@@ -1,10 +1,12 @@
 <template>
-  <v-app-bar flat>
-    <v-btn icon flat :size="40">
+  <v-app-bar flat :border="preferredTheme === 'light'">
+    <v-btn icon flat :size="40" :disabled="!canCreateANewNote" @click="addNewNote">
       <v-icon icon="mdi-square-edit-outline" />
     </v-btn>
     <template v-slot:append v-if="!smAndUp">
-      <v-app-bar-nav-icon @click="isNavigationDrawerPermanent = !isNavigationDrawerPermanent" />
+      <v-app-bar-nav-icon
+        @click="isNavigationDrawerPermanent = !isNavigationDrawerPermanent"
+      />
     </template>
     <v-spacer></v-spacer>
     <v-btn icon @click="changeTheme">
@@ -20,9 +22,7 @@ import { useDisplay, useTheme } from "vuetify";
 import { usePrefferedTheme } from "@/composables/usePrefferedTheme";
 import { useAppStore } from "@/store/app";
 import { storeToRefs } from "pinia";
-
-// store
-const store = useAppStore()
+import { useNotesStore } from "../../store/notes";
 
 const preferredTheme = ref(usePrefferedTheme());
 const vTheme = useTheme();
@@ -36,8 +36,14 @@ const changeTheme = () => {
   vTheme.global.name.value = theme;
 };
 
-
+// app store
+const appStore = useAppStore();
 // show sidebar toggle
-const { isNavigationDrawerPermanent } = storeToRefs(store);
+const { isNavigationDrawerPermanent } = storeToRefs(appStore);
 const { smAndUp } = useDisplay();
+
+// notes store
+const notesStore = useNotesStore();
+const { canCreateANewNote } = storeToRefs(notesStore);
+const { addNewNote } = notesStore;
 </script>
