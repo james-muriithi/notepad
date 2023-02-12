@@ -1,31 +1,34 @@
 <template>
   <v-container class="h-100">
-    <v-textarea auto-grow variant="plain" @focus="createNewNote" />
+    <v-textarea
+      auto-grow
+      variant="plain"
+      @focus="addNewNote"
+      ref="textArea"
+    />
   </v-container>
 </template>
 
 <script lang="ts" setup>
-import { useNotesStore } from "@/store/notes";
-import Note from "@/types/Note";
 import { storeToRefs } from "pinia";
-import uuid4 from "uuid4";
+import { ref, Ref, watch } from "vue";
+import { useNotesStore } from "@/store/notes";
+
 // store
 const store = useNotesStore();
 
-const { notes, currentNote, canCreateANewNote } = storeToRefs(store);
+const { addNewNote } = store;
+const { canCreateANewNote } = storeToRefs(store);
 
-const createNewNote = () => {
-  if (!canCreateANewNote.value) return;
-  const defaultNote: Note = {
-    id: uuid4(),
-    title: "New note",
-    content: "",
-    createdAt: new Date().toISOString(),
-  };
+// refs
+const textArea:Ref<HTMLElement|null> = ref(null)
 
-  notes.value.unshift(defaultNote);
-  currentNote.value = defaultNote.id;
-};
+watch(canCreateANewNote, (newValue) => {
+  if(!newValue) {
+    textArea.value?.focus()
+  }
+})
+
 </script>
 
 <style lang="scss" scoped>

@@ -6,7 +6,7 @@
   >
     <template v-slot:prepend>
       <v-list-item lines="two" class="text-right">
-        <v-btn icon :size="40" flat :disabled="!currentNote">
+        <v-btn icon :size="40" flat :disabled="!currentNote" @click="deleteNote(currentNote)">
           <v-icon icon="mdi-delete" />
         </v-btn>
       </v-list-item>
@@ -56,9 +56,9 @@ import { useAppStore } from "@/store/app";
 const notesStore = useNotesStore();
 const { notes, currentNote } = storeToRefs(notesStore);
 
-if (!currentNote.value && notes.value.length) {
-  currentNote.value = notes.value[0].id;
-}
+const { deleteNote, setDefaultCurrentNote } = notesStore
+
+setDefaultCurrentNote();
 
 // screen size
 const appStore = useAppStore();
