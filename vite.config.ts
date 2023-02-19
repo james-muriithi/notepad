@@ -22,10 +22,7 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
-      devOptions: {
-        enabled: true
-      },
-      manifest: {
+      manifest: { 
         name: 'Notes',
         short_name: 'Notes',
         description: 'Notes app',
@@ -41,9 +38,27 @@ export default defineConfig({
             src: 'android-chrome-512x512.png',
             sizes: '512x512',
             type: 'image/png'
+          },
+          {
+            src: 'android-chrome-512x512.png',
+            sizes: '512x512',
+            type: 'image/png'
+          },
+          {
+            src: 'android-chrome-maskable-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable'
+          },
+        ],
+        share_target: {
+          action: '/',
+          method: 'GET',
+          params: {
+            text: 'text'
           }
-        ]
-      }
+        }
+      },
     })
   ],
   define: { 'process.env': {} },
