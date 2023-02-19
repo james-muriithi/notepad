@@ -2,11 +2,17 @@
   <v-navigation-drawer
     :width="mdAndUp ? 230 : 200"
     :permanent="isNavigationDrawerPermanent"
-    style="position: fixed; bottom: 0;top: 0;"
+    style="position: fixed; bottom: 0; top: 0"
   >
     <template v-slot:prepend>
       <v-list-item lines="two" class="text-right">
-        <v-btn icon :size="40" flat :disabled="!currentNote" @click="deleteNote(currentNote)">
+        <v-btn
+          icon
+          :size="40"
+          flat
+          :disabled="!currentNote"
+          @click="deleteNote(currentNote || '')"
+        >
           <v-icon icon="mdi-delete" />
         </v-btn>
       </v-list-item>
@@ -24,16 +30,16 @@
             @click="currentNote = id"
           >
             <template #title>
-              <h3 class="font-weight-bold text-capitalize">{{ title||'New note' }}</h3>
+              <h3 class="font-weight-bold text-capitalize">
+                {{ title || "New note" }}
+              </h3>
             </template>
             <template #subtitle>
               <p class="mt-1">
                 <template v-if="getNoteContent(content).length">
                   {{ getNoteContent(content).slice(0, 30) }}
                 </template>
-                <template v-else>
-                  No content
-                </template>
+                <template v-else> No content </template>
               </p>
             </template>
           </v-list-item>
@@ -56,9 +62,7 @@ import { useAppStore } from "@/store/app";
 const notesStore = useNotesStore();
 const { notes, currentNote } = storeToRefs(notesStore);
 
-const { deleteNote, setDefaultCurrentNote } = notesStore
-
-setDefaultCurrentNote();
+const { deleteNote } = notesStore;
 
 // screen size
 const appStore = useAppStore();
@@ -71,8 +75,8 @@ watch(smAndUp, (smAndUp) => {
   isNavigationDrawerPermanent.value = smAndUp;
 });
 
-const getNoteContent = (content:string):string => {
-  const c = content.split('\n').slice(1);
-  return c.join('\n')
-}
+const getNoteContent = (content: string): string => {
+  const c = content.split("\n").slice(1);
+  return c.join("\n");
+};
 </script>

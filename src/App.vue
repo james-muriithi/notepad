@@ -3,4 +3,12 @@
 </template>
 
 <script lang="ts" setup>
+import { useNotesStore } from "@/store/notes";
+import { onBeforeMount } from "vue-demi";
+
+const { getNotes, setDefaultCurrentNote } = useNotesStore();
+onBeforeMount(async ()=>{
+  await getNotes();
+  setDefaultCurrentNote();
+});
 </script>
