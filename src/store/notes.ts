@@ -30,7 +30,7 @@ export const useNotesStore = defineStore("notes", () => {
       id: uuid4(),
       title: "",
       content: "",
-      createdAt: new Date().toISOString(),
+      createdAt: new Date().getTime(),
     };
 
     notes.value.unshift(defaultNote);
@@ -66,7 +66,8 @@ export const useNotesStore = defineStore("notes", () => {
   };
 
   const getNotes = async (): Promise<void> => {
-    notes.value = await db.table('notes').reverse().toArray();
+    notes.value = await db.table('notes').toArray() as Note[];
+    notes.value.sort((note1, note2) => note2.createdAt - note1.createdAt)
   }
 
   return {

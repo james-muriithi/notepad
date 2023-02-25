@@ -2,5 +2,5 @@ export default interface Note {
     id: string;
     title: string;
     content: string;
-    createdAt?: string;
+    createdAt: number;
 }

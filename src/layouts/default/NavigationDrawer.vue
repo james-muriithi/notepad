@@ -27,7 +27,7 @@
             class="px-4 py-3 mt-3"
             :active="currentNote === id"
             value="home"
-            @click="currentNote = id"
+            @click="setCurrentNote(id)"
           >
             <template #title>
               <h3 class="font-weight-bold text-capitalize">
@@ -37,7 +37,7 @@
             <template #subtitle>
               <p class="mt-1">
                 <template v-if="getNoteContent(content).length">
-                  {{ getNoteContent(content).slice(0, 30) }}
+                  {{ getNoteContent(content) }}
                 </template>
                 <template v-else> No content </template>
               </p>
@@ -78,5 +78,15 @@ watch(smAndUp, (smAndUp) => {
 const getNoteContent = (content: string): string => {
   const c = content.split("\n").slice(1);
   return c.join("\n");
+};
+
+const setCurrentNote = (noteId: string) => {
+  if (noteId !== currentNote.value) {
+    currentNote.value = noteId;
+    notes.value = notes.value.filter(({ id, content }) => {
+      if(content.length === 0) deleteNote(id);
+      return content.length
+    });
+  }
 };
 </script>
