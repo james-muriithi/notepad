@@ -21,8 +21,11 @@ export default defineConfig({
       },
     }),
     VitePWA({
-      registerType: 'autoUpdate',
-      injectRegister: 'auto',
+      registerType: 'prompt',
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
+      workbox: {
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json,vue,txt,woff2,woff,ttf}']
+     },
       manifest: { 
         name: 'Notes',
         short_name: 'Notes',
