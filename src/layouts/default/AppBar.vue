@@ -1,15 +1,23 @@
 <template>
   <v-app-bar flat :border="preferredTheme === 'light'">
-    <v-btn icon flat :size="40" :disabled="!canCreateANewNote" @click="addNewNote">
+    <v-btn
+      icon
+      flat
+      :size="40"
+      :disabled="!canCreateANewNote"
+      @click="addNewNote"
+      aria-label="create new note"
+    >
       <v-icon icon="mdi-square-edit-outline" />
     </v-btn>
     <template v-slot:append v-if="!smAndUp">
       <v-app-bar-nav-icon
         @click="isNavigationDrawerPermanent = !isNavigationDrawerPermanent"
+        aria-label="toggle navbar"
       />
     </template>
     <v-spacer></v-spacer>
-    <v-btn icon @click="changeTheme">
+    <v-btn icon @click="changeTheme" aria-label="toggle theme">
       <v-icon v-if="preferredTheme === 'light'">mdi-weather-night</v-icon>
       <v-icon v-else>mdi-weather-sunny</v-icon>
     </v-btn>

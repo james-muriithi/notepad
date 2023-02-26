@@ -12,6 +12,7 @@
           flat
           :disabled="!currentNote"
           @click="deleteNote(currentNote || '')"
+          aria-label="Delete note"
         >
           <v-icon icon="mdi-delete" />
         </v-btn>
@@ -84,8 +85,8 @@ const setCurrentNote = (noteId: string) => {
   if (noteId !== currentNote.value) {
     currentNote.value = noteId;
     notes.value = notes.value.filter(({ id, content }) => {
-      if(content.length === 0) deleteNote(id);
-      return content.length
+      if (content.length === 0) deleteNote(id);
+      return content.length;
     });
   }
 };
