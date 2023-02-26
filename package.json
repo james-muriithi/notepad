@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src --ext .vue,.ts --max-warnings 0 --no-fix",
-    "lint:fix": "eslint src --ext .vue --fix"
+    "lint:fix": "eslint src --ext .vue --fix",
+    "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
     "@mdi/font": "7.0.96",

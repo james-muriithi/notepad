@@ -4,10 +4,10 @@
 
 <script lang="ts" setup>
 import { useNotesStore } from "@/store/notes";
-import { onBeforeMount } from "vue-demi";
+import { onBeforeMount } from "vue";
 
 const { getNotes, setDefaultCurrentNote } = useNotesStore();
-onBeforeMount(async ()=>{
+onBeforeMount(async () => {
   await getNotes();
   setDefaultCurrentNote();
 });

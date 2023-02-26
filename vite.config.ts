@@ -22,6 +22,7 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: 'autoUpdate',
+      injectRegister: 'auto',
       manifest: { 
         name: 'Notes',
         short_name: 'Notes',
