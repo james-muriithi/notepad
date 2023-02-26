@@ -29,6 +29,8 @@
             :active="currentNote === id"
             value="home"
             @click="setCurrentNote(id)"
+            :aria-label="title"
+            role="listitem"
           >
             <template #title>
               <h3 class="font-weight-bold text-capitalize">
@@ -36,7 +38,7 @@
               </h3>
             </template>
             <template #subtitle>
-              <p class="mt-1">
+              <p class="mt-1 text-light">
                 <template v-if="getNoteContent(content).length">
                   {{ getNoteContent(content) }}
                 </template>

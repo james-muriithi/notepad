@@ -20,6 +20,7 @@ export default createVuetify({
         colors: {
           primary: '#1867C0',
           secondary: '#5CBBF6',
+          light: '#212121'
         },
       },
       dark: {
@@ -27,7 +28,8 @@ export default createVuetify({
           primary: '#1e1e1e',
           secondary: '#2c211f',
           highlight: '#464646',
-          appBar: '#3c3735'
+          appBar: '#3c3735',
+          light: '#fafafa',
         }
       }
     },
