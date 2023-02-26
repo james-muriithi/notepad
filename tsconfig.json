@@ -1,24 +1,26 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "target": "esnext",
     "useDefineForClassFields": true,
     "allowSyntheticDefaultImports": true,
-    "module": "esnext",
     "moduleResolution": "node",
     "strict": true,
     "jsx": "preserve",
     "sourceMap": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["esnext", "dom"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "lib": ["DOM", "ESNext"],
     "types": [
       "node",
-      "vuetify"
+      "vuetify",
+      "vite-plugin-pwa/client"
     ],
     "paths": {
       "@/*": ["src/*"]
-    },
+    }
   },
   "include": [
     "src/**/*.ts",
@@ -26,5 +28,13 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "vite.config.ts"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules",
+    "test",
+    "test.ts",
+    "**/*.spec.ts",
+    "**/*.worker.ts"
   ]
 }
